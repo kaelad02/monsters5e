@@ -8,6 +8,7 @@ import { StatBlockComponent } from './stat-block/stat-block.component';
 import { CreatureHeadingComponent } from './creature-heading/creature-heading.component';
 import { PropertyLineComponent } from './property-line/property-line.component';
 import { AbilitiesBlockComponent } from './abilities-block/abilities-block.component';
+import { TaperedRuleComponent } from './tapered-rule/tapered-rule.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { AbilitiesBlockComponent } from './abilities-block/abilities-block.compo
     StatBlockComponent,
     CreatureHeadingComponent,
     PropertyLineComponent,
-    AbilitiesBlockComponent
+    AbilitiesBlockComponent,
+    TaperedRuleComponent
   ],
   imports: [
     BrowserModule,

@@ -6,12 +6,14 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { StatBlockComponent } from './stat-block/stat-block.component';
 import { CreatureHeadingComponent } from './creature-heading/creature-heading.component';
+import { PropertyLineComponent } from './property-line/property-line.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StatBlockComponent,
-    CreatureHeadingComponent
+    CreatureHeadingComponent,
+    PropertyLineComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'property-line',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./property-line.component.css']
 })
 export class PropertyLineComponent implements OnInit {
+  @Input() name: string;
+  @Input() desc: string;
 
   constructor() { }
 

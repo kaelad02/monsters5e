@@ -10,6 +10,7 @@ import { PropertyLineComponent } from './property-line/property-line.component';
 import { AbilitiesBlockComponent } from './abilities-block/abilities-block.component';
 import { TaperedRuleComponent } from './tapered-rule/tapered-rule.component';
 import { TopStatsComponent } from './top-stats/top-stats.component';
+import { PropertyBlockComponent } from './property-block/property-block.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TopStatsComponent } from './top-stats/top-stats.component';
     PropertyLineComponent,
     AbilitiesBlockComponent,
     TaperedRuleComponent,
-    TopStatsComponent
+    TopStatsComponent,
+    PropertyBlockComponent
   ],
   imports: [
     BrowserModule,

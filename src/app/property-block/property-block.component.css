@@ -1,0 +1,23 @@
+div {
+  margin-top: 0.3em;
+  margin-bottom: 0.9em;
+  line-height: 1.5;
+  display: block;
+}
+
+div >>> h4 {
+  margin: 0;
+  display: inline;
+  font-weight: bold;
+  font-style: italic;
+}
+
+div >>> p:first-of-type {
+  display: inline;
+  text-indent: 0;
+}
+
+div >>> p {
+  text-indent: 1em;
+  margin: 0;
+}

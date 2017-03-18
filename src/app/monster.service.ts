@@ -7,6 +7,11 @@ export class MonsterService {
 
   constructor() { }
 
+  /*
+  * consider switching to Async pattern with Promises
+  * https://angular.io/docs/ts/latest/tutorial/toh-pt4.html#async-services-and-_promise-s
+  */
+
   getNames(): string[] {
     return MONSTERS.map(function(monster) {
       return monster.name;

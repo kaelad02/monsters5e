@@ -8,7 +8,12 @@
     [type]="monster.type"
     [subtype]="monster.subtype"
     [alignment]="monster.alignment"></creature-heading>
-  <top-stats></top-stats>
+  <top-stats
+    [armor_class]="monster.armor_class"
+    [hit_points]="monster.hit_points"
+    [hit_dice]="monster.hit_dice"
+    [speed]="monster.speed"
+    [abilityScores]="monster.abilityScores"></top-stats>
 
   <property-block>
     <h4>Antimagic Susceptibility.</h4>

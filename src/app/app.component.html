@@ -1,4 +1,10 @@
-<h1>
-  {{title}}
-</h1>
-<stat-block></stat-block>
+<div style='margin: 20px;'>
+  Monster:
+  <select [(ngModel)]="selectedName" (click)="onSelect()">
+    <option *ngFor="let name of names" value={{name}}>
+      {{name}}
+    </option>
+  </select>
+</div>
+
+<stat-block *ngIf="selectedName != null"></stat-block>

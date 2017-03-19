@@ -63,7 +63,7 @@ export class SavingThrows {
   }
 }
 
-enum Ability {
+export enum Ability {
   STR, DEX, CON, INT, WIS, CHA
 }
 

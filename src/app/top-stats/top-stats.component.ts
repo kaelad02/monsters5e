@@ -19,6 +19,9 @@ export class TopStatsComponent implements OnInit, OnChanges {
   private static readonly savingLabels: string[] = ["Str", "Dex", "Con", "Int", "Wis", "Cha"];
   saves: string;
 
+  @Input() skillModifiers: [string, number][];
+  skills: string;
+
   constructor() { }
 
   ngOnInit() {
@@ -31,7 +34,20 @@ export class TopStatsComponent implements OnInit, OnChanges {
     let numDice = this.hit_dice.substring(0, index);
     this.hp_mod = Number(numDice) * this.abilityScores.getModifier(Ability.CON);
 
-    this.saves = this.getSavingThrows();
+    if (this.savingThrows) {
+      this.saves = this.getSavingThrows();
+    }
+    if (this.skillModifiers) {
+      this.skills = this.getSkills();
+    }
+  }
+
+  formatModifier(modifier: number): string {
+    if(modifier >= 0) {
+      return '+' + modifier;
+    } else {
+      return '' + modifier;
+    }
   }
 
   getSavingThrows(): string {
@@ -46,17 +62,35 @@ export class TopStatsComponent implements OnInit, OnChanges {
             // add separator
             saves += ", ";
           }
-          saves += TopStatsComponent.savingLabels[ability] + " ";
-          if(mod >= 0) {
-            saves += "+" + mod;
-          } else {
-            // use an en dash, not a normal dash to make it more visible
-            saves += "–" + Math.abs(mod);
-          }
+          saves += TopStatsComponent.savingLabels[ability] + " "
+            + this.formatModifier(mod);
         }
       }
     }
     return saves;
+  }
+
+  getSkills(): string {
+    let skills = '';
+    for (let skill of this.skillModifiers) {
+      if (skills.length > 0) {
+        // add separator
+        skills += ", ";
+      }
+      // format skill name
+      let name = skill[0]
+        .split('_')
+        .map(function(s) {
+          if (s == 'of') {
+            return s;
+          }
+          // capitalize first letter
+          return s.charAt(0).toUpperCase() + s.slice(1);
+        })
+        .join(' ');
+      skills += name + ' ' + this.formatModifier(skill[1]);
+    }
+    return skills;
   }
 
 }

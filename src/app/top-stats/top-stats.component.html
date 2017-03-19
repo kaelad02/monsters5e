@@ -6,6 +6,7 @@
 
 <abilities-block [abilityScores]="abilityScores"></abilities-block>
 
+<property-line *ngIf="saves" name="Saving Throws" desc={{saves}}></property-line>
 <property-line name="Damage Immunities" desc="poison, psychic"></property-line>
 <property-line name="Condition Immunities" desc="blinded, charmed, deafened, exhaustion, frightened, paralyzed, petrified, poisoned"></property-line>
 <property-line name="Senses" desc="blindsight 60 ft. (blind beyond this radius), passive Perception 6"></property-line>

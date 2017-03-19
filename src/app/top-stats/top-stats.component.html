@@ -8,10 +8,15 @@
 
 <property-line *ngIf="saves" name="Saving Throws" desc={{saves}}></property-line>
 <property-line *ngIf="skills" name="Skills" desc={{skills}}></property-line>
-<property-line name="Damage Immunities" desc="poison, psychic"></property-line>
-<property-line name="Condition Immunities" desc="blinded, charmed, deafened, exhaustion, frightened, paralyzed, petrified, poisoned"></property-line>
-<property-line name="Senses" desc="blindsight 60 ft. (blind beyond this radius), passive Perception 6"></property-line>
-<property-line name="Languages" desc="—"></property-line>
-<property-line name="Challenge" desc="1 (200 XP)"></property-line>
+<property-line *ngIf="damage_vulnerabilities" name="Damage Vulnerabilities" desc={{damage_vulnerabilities}}></property-line>
+<property-line *ngIf="damage_resistances" name="Damage Resistances" desc={{damage_resistances}}></property-line>
+<property-line *ngIf="damage_immunities" name="Damage Immunities" desc={{damage_immunities}}></property-line>
+<property-line *ngIf="condition_immunities" name="Condition Immunities" desc={{condition_immunities}}></property-line>
+<property-line *ngIf="senses" name="Senses" desc={{senses}}></property-line>
+
+<property-line *ngIf="languages" name="Languages" desc={{languages}}></property-line>
+<property-line *ngIf="!languages" name="Languages" desc="—"></property-line>
+
+<property-line name="Challenge" desc="{{challenge_rating}} ({{xp}})"></property-line>
 
 <tapered-rule></tapered-rule>

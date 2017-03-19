@@ -22,6 +22,21 @@ export class TopStatsComponent implements OnInit, OnChanges {
   @Input() skillModifiers: [string, number][];
   skills: string;
 
+  @Input() damage_vulnerabilities: string;
+  @Input() damage_resistances: string;
+  @Input() damage_immunities: string;
+  @Input() condition_immunities: string;
+  @Input() senses: string;
+  @Input() languages: string;
+
+  @Input() challenge_rating: string;
+  private static readonly xpByCr: number[] = [
+    0, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900,
+    7200, 8400, 10000, 11500, 13000, 15000, 18000, 20000, 22000, 25000,
+    33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
+  ];
+  xp: number;
+
   constructor() { }
 
   ngOnInit() {
@@ -40,6 +55,7 @@ export class TopStatsComponent implements OnInit, OnChanges {
     if (this.skillModifiers) {
       this.skills = this.getSkills();
     }
+    this.xp = this.getXp();
   }
 
   formatModifier(modifier: number): string {
@@ -91,6 +107,19 @@ export class TopStatsComponent implements OnInit, OnChanges {
       skills += name + ' ' + this.formatModifier(skill[1]);
     }
     return skills;
+  }
+
+  getXp(): number {
+    let xp: number;
+    // check if this is a fraction of 1 CR
+    let index = this.challenge_rating.indexOf('/');
+    if (index >= 0) {
+      let fraction = this.challenge_rating.slice(index + 1);
+      xp = TopStatsComponent.xpByCr[1] / Number(fraction);
+    } else {
+      xp = TopStatsComponent.xpByCr[Number(this.challenge_rating)];
+    }
+    return xp;
   }
 
 }

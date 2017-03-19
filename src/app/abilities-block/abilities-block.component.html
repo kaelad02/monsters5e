@@ -1,20 +1,14 @@
 <tapered-rule></tapered-rule>
 <table>
   <tr>
-    <th>STR</th>
-    <th>DEX</th>
-    <th>CON</th>
-    <th>INT</th>
-    <th>WIS</th>
-    <th>CHA</th>
+    <th *ngFor="let label of labels">
+      {{label}}
+    </th>
   </tr>
   <tr>
-    <td>14</td>
-    <td>11</td>
-    <td>13</td>
-    <td>1</td>
-    <td>3</td>
-    <td>1</td>
+    <td *ngFor="let ability of abilities">
+      {{abilityScores.getScore(ability)}} ({{getModifier(ability)}})
+    </td>
   </tr>
 </table>
 <tapered-rule></tapered-rule>

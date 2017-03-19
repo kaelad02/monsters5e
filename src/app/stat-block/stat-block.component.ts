@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Monster } from '../monster';
 
 @Component({
   selector: 'stat-block',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stat-block.component.css']
 })
 export class StatBlockComponent implements OnInit {
+  @Input() monster: Monster;
 
   constructor() { }
 

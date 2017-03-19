@@ -24,6 +24,6 @@ export class AppComponent implements OnInit {
   }
 
   onSelect(): void {
-    selectedMonster => this.monsterService.getMonster(this.selectedName);
+    this.selectedMonster = this.monsterService.getMonster(this.selectedName);
   }
 }

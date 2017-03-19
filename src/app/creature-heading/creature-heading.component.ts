@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'creature-heading',
@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./creature-heading.component.css']
 })
 export class CreatureHeadingComponent implements OnInit {
+  @Input() name: string;
+  @Input() size: string;
+  @Input() type: string;
+  @Input() subtype: string;
+  @Input() alignment: string;
 
   constructor() { }
 

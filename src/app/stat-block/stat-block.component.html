@@ -2,7 +2,12 @@
       rel='stylesheet' type='text/css'>
 <div class="bar"></div>
 <div id="content-wrap">
-  <creature-heading></creature-heading>
+  <creature-heading
+    [name]="monster.name"
+    [size]="monster.size"
+    [type]="monster.type"
+    [subtype]="monster.subtype"
+    [alignment]="monster.alignment"></creature-heading>
   <top-stats></top-stats>
 
   <property-block>

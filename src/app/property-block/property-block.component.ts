@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { SpecialAbility } from '../monster';
 
 @Component({
   selector: 'property-block',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./property-block.component.css']
 })
 export class PropertyBlockComponent implements OnInit {
+  @Input() ability: SpecialAbility;
 
   constructor() { }
 

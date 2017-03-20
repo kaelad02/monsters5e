@@ -5,19 +5,19 @@ div {
   display: block;
 }
 
-div >>> h4 {
+h4 {
   margin: 0;
   display: inline;
   font-weight: bold;
   font-style: italic;
 }
 
-div >>> p:first-of-type {
+p:first-of-type {
   display: inline;
   text-indent: 0;
 }
 
-div >>> p {
+p {
   text-indent: 1em;
   margin: 0;
 }

@@ -24,22 +24,19 @@
     [languages]="monster.languages"
     [challenge_rating]="monster.challenge_rating"></top-stats>
 
-  <property-block *ngFor="let ability of monster.special_abilities">
-    <h4>{{ability.name}}.</h4>
-    <p>{{ability.desc}}</p>
-  </property-block>
+  <property-block
+    *ngFor="let ability of monster.special_abilities"
+    [ability]="ability"></property-block>
 
   <h3 *ngIf="monster.actions">Actions</h3>
-  <property-block *ngFor="let action of monster.actions">
-    <h4>{{action.name}}.</h4>
-    <p>{{action.desc}}</p>
-  </property-block>
+  <property-block
+    *ngFor="let action of monster.actions"
+    [ability]="action"></property-block>
 
   <h3 *ngIf="monster.reactions">Reactions</h3>
-  <property-block *ngFor="let action of monster.reactions">
-    <h4>{{action.name}}.</h4>
-    <p>{{action.desc}}</p>
-  </property-block>
+  <property-block
+    *ngFor="let action of monster.reactions"
+    [ability]="action"></property-block>
 
   <h3 *ngIf="monster.legendary_actions">Legendary Actions</h3>
   <p *ngIf="monster.legendary_actions">The {{monster.name | lowercase}} can take

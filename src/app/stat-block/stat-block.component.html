@@ -24,31 +24,33 @@
     [languages]="monster.languages"
     [challenge_rating]="monster.challenge_rating"></top-stats>
 
-  <property-block>
-    <h4>Antimagic Susceptibility.</h4>
-    <p>The armor is incapacitated while in the area of an <i>antimagic
-      field</i>.  If targeted by <i>dispel magic</i>, the armor must succeed
-      on a Constitution saving throw against the caster’s spell save DC or
-      fall unconscious for 1 minute.</p>
-  </property-block>
-  <property-block>
-    <h4>False Appearance.</h4>
-    <p>While the armor remains motionless, it is indistinguishable from a
-      normal suit of armor.</p>
+  <property-block *ngFor="let ability of monster.special_abilities">
+    <h4>{{ability.name}}.</h4>
+    <p>{{ability.desc}}</p>
   </property-block>
 
-  <h3>Actions</h3>
-
-  <property-block>
-    <h4>Multiattack.</h4>
-    <p>The armor makes two melee attacks.</p>
+  <h3 *ngIf="monster.actions">Actions</h3>
+  <property-block *ngFor="let action of monster.actions">
+    <h4>{{action.name}}.</h4>
+    <p>{{action.desc}}</p>
   </property-block>
 
-  <property-block>
-    <h4>Slam.</h4>
-    <p><i>Melee Weapon Attack:</i> +4 to hit, reach 5 ft., one target.
-      <i>Hit:</i> 5 (1d6 + 2) bludgeoning damage.</p>
+  <h3 *ngIf="monster.reactions">Reactions</h3>
+  <property-block *ngFor="let action of monster.reactions">
+    <h4>{{action.name}}.</h4>
+    <p>{{action.desc}}</p>
   </property-block>
+
+  <h3 *ngIf="monster.legendary_actions">Legendary Actions</h3>
+  <p *ngIf="monster.legendary_actions">The {{monster.name | lowercase}} can take
+    3 legendary actions, choosing from the options below. Only one legendary
+    action option can be used at a time and only one at the end of another
+    creature's turn. The {{monster.name | lowercase}} regains spent legendary
+    actions at the start of its turn.</p>
+  <property-line
+    *ngFor="let action of monster.legendary_actions"
+    [name]="action.name"
+    [desc]="action.desc"></property-line>
 
 </div>
 <div class="bar"></div>

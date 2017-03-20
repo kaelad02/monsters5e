@@ -27,6 +27,8 @@ export class Monster {
 
   actions: Action[];
 
+  reactions: Action[];
+
   legendary_actions: Action[];
 }
 

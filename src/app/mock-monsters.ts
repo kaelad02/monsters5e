@@ -47,6 +47,7 @@ export const MONSTERS: Monster[] = [
         damage_bonus: 2
       }
     ],
+    reactions: null,
     legendary_actions: null
   },
   {
@@ -115,6 +116,7 @@ export const MONSTERS: Monster[] = [
         damage_bonus: 1
       }
     ],
+    reactions: null,
     legendary_actions: null
   }
 ];

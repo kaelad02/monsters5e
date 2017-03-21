@@ -11,6 +11,7 @@ import { AbilitiesBlockComponent } from './abilities-block/abilities-block.compo
 import { TaperedRuleComponent } from './tapered-rule/tapered-rule.component';
 import { TopStatsComponent } from './top-stats/top-stats.component';
 import { PropertyBlockComponent } from './property-block/property-block.component';
+import { PItalicsComponent } from './p-italics/p-italics.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PropertyBlockComponent } from './property-block/property-block.componen
     AbilitiesBlockComponent,
     TaperedRuleComponent,
     TopStatsComponent,
-    PropertyBlockComponent
+    PropertyBlockComponent,
+    PItalicsComponent
   ],
   imports: [
     BrowserModule,

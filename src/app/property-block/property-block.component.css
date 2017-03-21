@@ -12,12 +12,12 @@ h4 {
   font-style: italic;
 }
 
-p:first-of-type {
+>>> p:first-of-type {
   display: inline;
   text-indent: 0;
 }
 
-p {
+>>> p {
   text-indent: 1em;
   margin: 0;
 }

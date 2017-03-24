@@ -9,11 +9,41 @@ export class Monster {
   hit_dice: string;
   speed: string;
 
-  abilityScores: AbilityScores;
+  // abilityScores: AbilityScores;
+  strength: number;
+  dexterity: number;
+  constitution: number;
+  intelligence: number;
+  wisdom: number;
+  charisma: number;
 
-  savingThrows: SavingThrows;
+  // savingThrows: SavingThrows;
+  strength_save?: number;
+  dexterity_save?: number;
+  constitution_save?: number;
+  intelligence_save?: number;
+  wisdom_save?: number;
+  charisma_save?: number;
 
-  skillModifiers: [string, number][];
+  // skillModifiers: [string, number][];
+  acrobatics?: number;
+  animal_handling?: number;
+  arcana?: number;
+  athletics?: number;
+  deception?: number;
+  history?: number;
+  insight?: number;
+  intimidation?: number;
+  investigation?: number;
+  medicine?: number;
+  nature?: number;
+  perception?: number;
+  performance?: number;
+  persuasion?: number;
+  religion?: number;
+  sleight_of_hand?: number;
+  stealth?: number;
+  survival?: number;
 
   damage_vulnerabilities: string;
   damage_resistances: string;
@@ -27,9 +57,79 @@ export class Monster {
 
   actions: Action[];
 
-  reactions: Action[];
+  reactions?: Action[];
 
-  legendary_actions: Action[];
+  legendary_actions?: Action[];
+
+  getAbilityScores(): AbilityScores {
+    return new AbilityScores(this.strength, this.dexterity, this.constitution,
+      this.intelligence, this.wisdom, this.charisma);
+  }
+
+  getSavingThrows(): SavingThrows {
+    return new SavingThrows(this.strength_save, this.dexterity_save,
+      this.constitution_save, this.intelligence_save, this.wisdom_save,
+      this.charisma_save);
+  }
+
+  getSkillModifiers(): [string, number][] {
+    let skills: [string, number][];
+    if (this.acrobatics) {
+      skills.push([ 'acrobatics', this.acrobatics ])
+    }
+    if (this.animal_handling) {
+      skills.push([ 'animal_handling', this.animal_handling ]);
+    }
+    if (this.arcana) {
+      skills.push([ 'arcana', this.arcana ]);
+    }
+    if (this.athletics) {
+      skills.push([ 'athletics', this.athletics ]);
+    }
+    if (this.deception) {
+      skills.push([ 'deception', this.deception ]);
+    }
+    if (this.history) {
+      skills.push([ 'history', this.history ]);
+    }
+    if (this.insight) {
+      skills.push([ 'insight', this.insight ]);
+    }
+    if (this.intimidation) {
+      skills.push([ 'intimidation', this.intimidation ]);
+    }
+    if (this.investigation) {
+      skills.push([ 'investigation', this.investigation ]);
+    }
+    if (this.medicine) {
+      skills.push([ 'medicine', this.medicine ]);
+    }
+    if (this.nature) {
+      skills.push([ 'nature', this.nature ]);
+    }
+    if (this.perception) {
+      skills.push([ 'perception', this.perception ]);
+    }
+    if (this.performance) {
+      skills.push([ 'performance', this.performance ]);
+    }
+    if (this.persuasion) {
+      skills.push([ 'persuasion', this.persuasion ]);
+    }
+    if (this.religion) {
+      skills.push([ 'religion', this.religion ]);
+    }
+    if (this.sleight_of_hand) {
+      skills.push([ 'sleight_of_hand', this.sleight_of_hand ]);
+    }
+    if (this.stealth) {
+      skills.push([ 'stealth', this.stealth ]);
+    }
+    if (this.survival) {
+      skills.push([ 'survival', this.survival ]);
+    }
+    return skills;
+  }
 }
 
 export class AbilityScores {
@@ -72,10 +172,10 @@ export enum Ability {
 export class SpecialAbility {
   name: string;
   desc: string;
+  attack_bonus: number;
 }
 
 export class Action extends SpecialAbility {
-  attack_bonus: number;
-  damage_dice: string;
-  damage_bonus: number;
+  damage_dice?: string;
+  damage_bonus?: number;
 }

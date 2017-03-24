@@ -1,27 +1,36 @@
 import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
 import { Monster } from './monster';
-import { MONSTERS } from './mock-monsters';
 
 @Injectable()
 export class MonsterService {
 
-  constructor() { }
+  private url = 'assets/5e-SRD-Monsters.json';
 
-  /*
-  * consider switching to Async pattern with Promises
-  * https://angular.io/docs/ts/latest/tutorial/toh-pt4.html#async-services-and-_promise-s
-  */
+  constructor(private http: Http) { }
 
-  getNames(): string[] {
-    return MONSTERS.map(function(monster) {
-      return monster.name;
-    });
+  private getMonsters(): Observable<Monster[]> {
+    return this.http.get(this.url)
+      .map(response => response.json() as Monster[])
+      // remove the license at the end of the file
+      .map(monsters => {
+        monsters.pop();
+        return monsters;
+      });
   }
 
-  getMonster(name: string): Monster {
-    return MONSTERS.find(function(monster){
-      return name == monster.name;
-    });
+  getNames(): Observable<string[]> {
+    return this.getMonsters()
+      .map(monsters => monsters.map(m => m.name));
+  }
+
+  getMonster(name: string): Observable<Monster> {
+    return this.getMonsters()
+      .map(monsters => monsters.find(m => name == m.name));
   }
 
 }

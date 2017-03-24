@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
+import { Observable } from 'rxjs/Observable';
+
 import { MonsterService } from './monster.service';
 import { Monster } from './monster';
 
@@ -20,10 +23,12 @@ export class AppComponent implements OnInit {
   }
 
   getMonsterNames(): void {
-    this.names = this.monsterService.getNames();
+    this.monsterService.getNames()
+      .subscribe(names => this.names = names);
   }
 
   onSelect(): void {
-    this.selectedMonster = this.monsterService.getMonster(this.selectedName);
+    this.monsterService.getMonster(this.selectedName)
+      .subscribe(monster => this.selectedMonster = monster);
   }
 }

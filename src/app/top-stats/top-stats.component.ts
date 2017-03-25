@@ -45,9 +45,11 @@ export class TopStatsComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     // TODO check if hit_dice or abilityScores changed
 
-    let index = this.hit_dice.indexOf('d');
-    let numDice = this.hit_dice.substring(0, index);
-    this.hp_mod = Number(numDice) * this.abilityScores.getModifier(Ability.CON);
+    if (this.hit_dice && this.abilityScores) {
+      let index = this.hit_dice.indexOf('d');
+      let numDice = this.hit_dice.substring(0, index);
+      this.hp_mod = Number(numDice) * this.abilityScores.getModifier(Ability.CON);
+    }
 
     if (this.savingThrows) {
       this.saves = this.getSavingThrows();
@@ -55,7 +57,9 @@ export class TopStatsComponent implements OnInit, OnChanges {
     if (this.skillModifiers) {
       this.skills = this.getSkills();
     }
-    this.xp = this.getXp();
+    if (this.challenge_rating) {
+      this.xp = this.getXp();
+    }
   }
 
   formatModifier(modifier: number): string {

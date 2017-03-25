@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
-import { AbilityScore, Ability, SavingThrows } from '../monster';
+import { AbilityScore, Ability } from '../monster';
 
 @Component({
   selector: 'top-stats',
@@ -15,7 +15,7 @@ export class TopStatsComponent implements OnInit, OnChanges {
 
   @Input() abilityScores: AbilityScore[];
 
-  @Input() savingThrows: SavingThrows;
+  @Input() savingThrows: number[];
   private static readonly savingLabels: string[] = ["Str", "Dex", "Con", "Int", "Wis", "Cha"];
   saves: string;
 
@@ -72,19 +72,15 @@ export class TopStatsComponent implements OnInit, OnChanges {
 
   getSavingThrows(): string {
     let saves = '';
-    for (let a in Ability) {
-      if (typeof Ability[a] === 'number') {
-        // get the modifier
-        let ability = Number(Ability[a]);
-        let mod = this.savingThrows.getModifier(ability);
-        if (mod != null) {
-          if (saves.length > 0) {
-            // add separator
-            saves += ", ";
-          }
-          saves += TopStatsComponent.savingLabels[ability] + " "
-            + this.formatModifier(mod);
+    for (let i = 0; i < this.savingThrows.length; i++) {
+      let mod = this.savingThrows[i];
+      if (mod != null) {
+        if (saves.length > 0) {
+          // add separator
+          saves += ", ";
         }
+        saves += TopStatsComponent.savingLabels[i] + " "
+          + this.formatModifier(mod);
       }
     }
     return saves;

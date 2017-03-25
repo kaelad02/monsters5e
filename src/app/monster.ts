@@ -83,10 +83,10 @@ export class Monster extends AbstractMonster {
     ];
   }
 
-  getSavingThrows(): SavingThrows {
-    return new SavingThrows(this.strength_save, this.dexterity_save,
+  getSavingThrows(): number[] {
+    return [ this.strength_save, this.dexterity_save,
       this.constitution_save, this.intelligence_save, this.wisdom_save,
-      this.charisma_save);
+      this.charisma_save ];
   }
 
   getSkillModifiers(): [string, number][] {
@@ -160,19 +160,6 @@ export class AbilityScore {
     let mod = (this.score - 10) / 2;
     mod = Math.floor(mod);
     return mod;
-  }
-}
-
-export class SavingThrows {
-  private mod: number[];
-
-  constructor(str: number, dex: number, con: number, int: number, wis: number,
-    cha: number) {
-    this.mod = [ str, dex, con, int, wis, cha ];
-  }
-
-  getModifier(ability: Ability): number {
-    return this.mod[ability];
   }
 }
 

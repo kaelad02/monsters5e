@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Monster, AbilityScores, SavingThrows } from '../monster';
+import { Monster } from '../monster';
 
 @Component({
   selector: 'stat-block',

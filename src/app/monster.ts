@@ -72,9 +72,15 @@ export class Monster extends AbstractMonster {
     }
   }
 
-  getAbilityScores(): AbilityScores {
-    return new AbilityScores(this.strength, this.dexterity, this.constitution,
-      this.intelligence, this.wisdom, this.charisma);
+  getAbilityScores(): AbilityScore[] {
+    return [
+      new AbilityScore(this.strength),
+      new AbilityScore(this.dexterity),
+      new AbilityScore(this.constitution),
+      new AbilityScore(this.intelligence),
+      new AbilityScore(this.wisdom),
+      new AbilityScore(this.charisma)
+    ];
   }
 
   getSavingThrows(): SavingThrows {
@@ -143,21 +149,15 @@ export class Monster extends AbstractMonster {
   }
 }
 
-export class AbilityScores {
-  private scores: number[];
+export class AbilityScore {
+  public readonly mod: number;
 
-  constructor(str: number, dex: number, con: number, int: number, wis: number,
-    cha: number) {
-    this.scores = [ str, dex, con, int, wis, cha ];
+  constructor(public readonly score: number) {
+    this.mod = this.getModifier();
   }
 
-  getScore(ability: Ability): number {
-    return this.scores[ability];
-  }
-
-  getModifier(ability: Ability): number {
-    let mod = this.scores[ability];
-    mod = (mod - 10) / 2;
+  private getModifier(): number {
+    let mod = (this.score - 10) / 2;
     mod = Math.floor(mod);
     return mod;
   }

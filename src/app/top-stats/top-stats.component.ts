@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
-import { AbilityScores, Ability, SavingThrows } from '../monster';
+import { AbilityScore, Ability, SavingThrows } from '../monster';
 
 @Component({
   selector: 'top-stats',
@@ -13,7 +13,7 @@ export class TopStatsComponent implements OnInit, OnChanges {
   hp_mod: number;
   @Input() speed: string;
 
-  @Input() abilityScores: AbilityScores;
+  @Input() abilityScores: AbilityScore[];
 
   @Input() savingThrows: SavingThrows;
   private static readonly savingLabels: string[] = ["Str", "Dex", "Con", "Int", "Wis", "Cha"];
@@ -48,7 +48,7 @@ export class TopStatsComponent implements OnInit, OnChanges {
     if (this.hit_dice && this.abilityScores) {
       let index = this.hit_dice.indexOf('d');
       let numDice = this.hit_dice.substring(0, index);
-      this.hp_mod = Number(numDice) * this.abilityScores.getModifier(Ability.CON);
+      this.hp_mod = Number(numDice) * this.abilityScores[Ability.CON].mod;
     }
 
     if (this.savingThrows) {

@@ -6,8 +6,8 @@
     </th>
   </tr>
   <tr>
-    <td *ngFor="let ability of abilities">
-      {{abilityScores.getScore(ability)}} ({{getModifier(ability)}})
+    <td *ngFor="let abilityScore of abilityScores">
+      {{abilityScore.score}} ({{abilityScore.mod}})
     </td>
   </tr>
 </table>

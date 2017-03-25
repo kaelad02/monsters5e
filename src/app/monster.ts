@@ -1,4 +1,4 @@
-export class Monster {
+export abstract class AbstractMonster {
   name: string;
   size: string;
   type: string;
@@ -61,6 +61,17 @@ export class Monster {
 
   legendary_actions?: Action[];
 
+}
+
+export class Monster extends AbstractMonster {
+
+  constructor(source: AbstractMonster) {
+    super();
+    for (let prop in source) {
+      this[prop] = source[prop];
+    }
+  }
+
   getAbilityScores(): AbilityScores {
     return new AbilityScores(this.strength, this.dexterity, this.constitution,
       this.intelligence, this.wisdom, this.charisma);
@@ -73,7 +84,7 @@ export class Monster {
   }
 
   getSkillModifiers(): [string, number][] {
-    let skills: [string, number][];
+    let skills: [string, number][] = new Array<[string, number]>();
     if (this.acrobatics) {
       skills.push([ 'acrobatics', this.acrobatics ])
     }

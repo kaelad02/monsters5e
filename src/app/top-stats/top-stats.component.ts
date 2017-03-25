@@ -16,10 +16,18 @@ export class TopStatsComponent implements OnInit, OnChanges {
   @Input() abilityScores: AbilityScore[];
 
   @Input() savingThrows: number[];
-  private static readonly savingLabels: string[] = ["Str", "Dex", "Con", "Int", "Wis", "Cha"];
+  private static readonly savingLabels: string[] = [
+    'Str', 'Dex', 'Con', 'Int', 'Wis', 'Cha'
+  ];
   saves: string;
 
-  @Input() skillModifiers: [string, number][];
+  @Input() skillModifiers: number[];
+  private static readonly skillLabels: string[] = [
+    'Acrobatics', 'Animal Handling', 'Arcana', 'Athletics', 'Deception',
+    'History', 'Insight', 'Intimidation', 'Investigation', 'Medicine', 'Nature',
+    'Perception', 'Performance', 'Persuasion', 'Religion', 'Sleight of Hand',
+    'Stealth', 'Survival'
+  ];
   skills: string;
 
   @Input() damage_vulnerabilities: string;
@@ -77,9 +85,9 @@ export class TopStatsComponent implements OnInit, OnChanges {
       if (mod != null) {
         if (saves.length > 0) {
           // add separator
-          saves += ", ";
+          saves += ', ';
         }
-        saves += TopStatsComponent.savingLabels[i] + " "
+        saves += TopStatsComponent.savingLabels[i] + ' '
           + this.formatModifier(mod);
       }
     }
@@ -88,23 +96,16 @@ export class TopStatsComponent implements OnInit, OnChanges {
 
   getSkills(): string {
     let skills = '';
-    for (let skill of this.skillModifiers) {
-      if (skills.length > 0) {
-        // add separator
-        skills += ", ";
+    for (let i = 0; i < this.skillModifiers.length; i++) {
+      let mod = this.skillModifiers[i];
+      if (mod != null) {
+        if (skills.length > 0) {
+          // add separator
+          skills += ', ';
+        }
+        skills += TopStatsComponent.skillLabels[i] + ' '
+          + this.formatModifier(mod);
       }
-      // format skill name
-      let name = skill[0]
-        .split('_')
-        .map(function(s) {
-          if (s == 'of') {
-            return s;
-          }
-          // capitalize first letter
-          return s.charAt(0).toUpperCase() + s.slice(1);
-        })
-        .join(' ');
-      skills += name + ' ' + this.formatModifier(skill[1]);
     }
     return skills;
   }

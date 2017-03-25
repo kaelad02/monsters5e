@@ -60,17 +60,19 @@ export class TopStatsComponent implements OnInit, OnChanges {
     }
 
     if (this.savingThrows) {
-      this.saves = this.getSavingThrows();
+      this.saves = this.getCommaSeparated(this.savingThrows,
+        TopStatsComponent.savingLabels);
     }
     if (this.skillModifiers) {
-      this.skills = this.getSkills();
+      this.skills = this.getCommaSeparated(this.skillModifiers,
+        TopStatsComponent.skillLabels);
     }
     if (this.challenge_rating) {
       this.xp = this.getXp();
     }
   }
 
-  formatModifier(modifier: number): string {
+  private formatModifier(modifier: number): string {
     if(modifier >= 0) {
       return '+' + modifier;
     } else {
@@ -78,39 +80,22 @@ export class TopStatsComponent implements OnInit, OnChanges {
     }
   }
 
-  getSavingThrows(): string {
-    let saves = '';
-    for (let i = 0; i < this.savingThrows.length; i++) {
-      let mod = this.savingThrows[i];
+  private getCommaSeparated(modifiers: number[], labels: string[]): string {
+    let line = '';
+    for (let i = 0; i < modifiers.length; i++) {
+      let mod = modifiers[i];
       if (mod != null) {
-        if (saves.length > 0) {
+        if (line.length > 0) {
           // add separator
-          saves += ', ';
+          line += ', ';
         }
-        saves += TopStatsComponent.savingLabels[i] + ' '
-          + this.formatModifier(mod);
+        line += labels[i] + ' ' + this.formatModifier(mod);
       }
     }
-    return saves;
+    return line;
   }
 
-  getSkills(): string {
-    let skills = '';
-    for (let i = 0; i < this.skillModifiers.length; i++) {
-      let mod = this.skillModifiers[i];
-      if (mod != null) {
-        if (skills.length > 0) {
-          // add separator
-          skills += ', ';
-        }
-        skills += TopStatsComponent.skillLabels[i] + ' '
-          + this.formatModifier(mod);
-      }
-    }
-    return skills;
-  }
-
-  getXp(): number {
+  private getXp(): number {
     let xp: number;
     // check if this is a fraction of 1 CR
     let index = this.challenge_rating.indexOf('/');

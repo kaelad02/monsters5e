@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AbilityScore, Ability } from '../monster';
 
 @Component({
@@ -6,29 +6,29 @@ import { AbilityScore, Ability } from '../monster';
   templateUrl: './top-stats.component.html',
   styleUrls: ['./top-stats.component.css']
 })
-export class TopStatsComponent implements OnInit, OnChanges {
+export class TopStatsComponent implements OnInit {
   @Input() armor_class: number;
   @Input() hit_points: number;
-  @Input() hit_dice: string;
-  hp_mod: number;
+  private _hit_dice: string;
+  private hp_mod: number;
   @Input() speed: string;
 
-  @Input() abilityScores: AbilityScore[];
+  private _abilityScores: AbilityScore[];
 
-  @Input() savingThrows: number[];
+  // input with getter/setter declared below
   private static readonly savingLabels: string[] = [
     'Str', 'Dex', 'Con', 'Int', 'Wis', 'Cha'
   ];
-  saves: string;
+  private saves: string;
 
-  @Input() skillModifiers: number[];
+  // input with getter/setter declared below
   private static readonly skillLabels: string[] = [
     'Acrobatics', 'Animal Handling', 'Arcana', 'Athletics', 'Deception',
     'History', 'Insight', 'Intimidation', 'Investigation', 'Medicine', 'Nature',
     'Perception', 'Performance', 'Persuasion', 'Religion', 'Sleight of Hand',
     'Stealth', 'Survival'
   ];
-  skills: string;
+  private skills: string;
 
   @Input() damage_vulnerabilities: string;
   @Input() damage_resistances: string;
@@ -37,38 +37,60 @@ export class TopStatsComponent implements OnInit, OnChanges {
   @Input() senses: string;
   @Input() languages: string;
 
-  @Input() challenge_rating: string;
+  // input with getter/setter declared below
+  private _challenge_rating: string;
   private static readonly xpByCr: number[] = [
     0, 200, 450, 700, 1100, 1800, 2300, 2900, 3900, 5000, 5900,
     7200, 8400, 10000, 11500, 13000, 15000, 18000, 20000, 22000, 25000,
     33000, 41000, 50000, 62000, 75000, 90000, 105000, 120000, 135000, 155000
   ];
-  xp: number;
+  private xp: number;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    // TODO check if hit_dice or abilityScores changed
+  @Input()
+  set hit_dice(hit_dice: string) {
+    this._hit_dice = hit_dice;
+    this.calculateHpMod();
+  }
+  get hit_dice(): string { return this._hit_dice; }
 
+  @Input()
+  set abilityScores(abilityScores: AbilityScore[]) {
+    this._abilityScores = abilityScores;
+    this.calculateHpMod();
+  }
+  get abilityScores(): AbilityScore[] { return this._abilityScores; }
+
+  @Input()
+  set savingThrows(savingThrows: number[]) {
+    this.saves = this.getCommaSeparated(savingThrows,
+      TopStatsComponent.savingLabels);
+  }
+
+  @Input()
+  set skillModifiers(skillModifiers: number[]) {
+    this.skills = this.getCommaSeparated(skillModifiers,
+      TopStatsComponent.skillLabels);
+  }
+
+  @Input()
+  set challenge_rating(challenge_rating: string) {
+    this._challenge_rating = challenge_rating;
+    if (challenge_rating != null) {
+      this.xp = this.getXp(challenge_rating);
+    }
+  }
+  get challenge_rating(): string { return this._challenge_rating; }
+
+  private calculateHpMod() {
     if (this.hit_dice && this.abilityScores) {
       let index = this.hit_dice.indexOf('d');
       let numDice = this.hit_dice.substring(0, index);
       this.hp_mod = Number(numDice) * this.abilityScores[Ability.CON].mod;
-    }
-
-    if (this.savingThrows) {
-      this.saves = this.getCommaSeparated(this.savingThrows,
-        TopStatsComponent.savingLabels);
-    }
-    if (this.skillModifiers) {
-      this.skills = this.getCommaSeparated(this.skillModifiers,
-        TopStatsComponent.skillLabels);
-    }
-    if (this.challenge_rating) {
-      this.xp = this.getXp();
     }
   }
 
@@ -95,15 +117,15 @@ export class TopStatsComponent implements OnInit, OnChanges {
     return line;
   }
 
-  private getXp(): number {
+  private getXp(challenge_rating: string): number {
     let xp: number;
     // check if this is a fraction of 1 CR
-    let index = this.challenge_rating.indexOf('/');
+    let index = challenge_rating.indexOf('/');
     if (index >= 0) {
-      let fraction = this.challenge_rating.slice(index + 1);
+      let fraction = challenge_rating.slice(index + 1);
       xp = TopStatsComponent.xpByCr[1] / Number(fraction);
     } else {
-      xp = TopStatsComponent.xpByCr[Number(this.challenge_rating)];
+      xp = TopStatsComponent.xpByCr[Number(challenge_rating)];
     }
     return xp;
   }

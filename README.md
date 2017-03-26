@@ -22,6 +22,14 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
 
+## Publishing
+
+To publish to GitHub pages, use the https://github.com/angular-buch/angular-cli-ghpages tool with the following command:
+```
+ng build --prod --base-href "https://kaelad02.github.io/monsters5e/"
+angular-cli-ghpages
+```
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

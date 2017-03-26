@@ -36,4 +36,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # Acknowledgements
 
-This project was inspired by https://github.com/Valloric/statblock5e. The intent was to take the web component developed in that project and turn them into Angular components. I saw a fork of that project, https://github.com/Arnatious/statblock5e, that was trying to generate statblocks on the fly. I wanted to do the same, but with Angular 2. In that project, I found a JSON file with the SRD monsters. I think it originally came from a Reddit post.
+This project was inspired by https://github.com/Valloric/statblock5e. The intent was to take the web component developed in that project and turn them into Angular components. I saw a fork of that project, https://github.com/Arnatious/statblock5e, that was generating statblocks on the fly. I wanted to do the same, but with Angular 2. In that project, I found a JSON file with the SRD monsters. I think it originally came from a Reddit post.
